@@ -1,9 +1,15 @@
 package com.example.EmployeePayRollApp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.ToString;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@ToString
 public class EmployeePayrollDTO {
 
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee Name is invalid")
@@ -13,15 +19,15 @@ public class EmployeePayrollDTO {
     @Min(value = 500, message = "Min Wage should be more than 500")
     public long salary;
 
-    public EmployeePayrollDTO(String name, long salary) {
-        this.name = name;
-        this.salary = salary;
-    }
+    public String gender;
 
+    @JsonFormat(pattern="dd MMM yyyy")
+    public LocalDate startDate;
 
+    public String note;
 
-    @Override
-    public String toString() {
-        return "Name=" + name + " Salary=" + salary;
-    }
+    public String profilePic;
+
+    public List<String> departments;
+
 }
