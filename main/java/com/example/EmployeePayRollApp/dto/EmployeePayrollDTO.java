@@ -1,9 +1,7 @@
 package com.example.EmployeePayRollApp.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -19,15 +17,21 @@ public class EmployeePayrollDTO {
     @Min(value = 500, message = "Min Wage should be more than 500")
     public long salary;
 
+    @Pattern(regexp = "male|female", message = " Gender  needs to be male or female")
     public String gender;
 
-    @JsonFormat(pattern="dd MMM yyyy")
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @NotNull(message = "Startdate should not be empty")
+    @PastOrPresent(message = "startDate should be past or today's date")
     public LocalDate startDate;
 
+    @NotBlank(message = "Note can not be empty")
     public String note;
 
+    @NotBlank(message = "profilePic can not be empty")
     public String profilePic;
 
+    @NotNull(message = "department should not be empty")
     public List<String> departments;
 
 }
